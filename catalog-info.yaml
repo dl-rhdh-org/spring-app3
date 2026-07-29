@@ -21,6 +21,8 @@ metadata:
     argocd/app-name: spring-app3
     argocd/app-namespace: openshift-gitops
     argocd/instance-name: main
+    backstage.io/techdocs-ref: dir:.
+    servicenow.com/entity-id: spring-app3
   tags:
     - spring-boot
     - java
@@ -34,6 +36,19 @@ metadata:
     - url: https://github.com/dl-rhdh-org/spring-app3/actions
       title: GitHub Actions
       icon: github
+    - url: https://openshift-gitops-server-openshift-gitops.apps.cluster-4z99r.dyn.redhatworkshops.io/applications/spring-app3
+      title: Argo CD
+      icon: dashboard
+    - url: https://spring-app3-spring-demos3.apps.cluster-4z99r.dyn.redhatworkshops.io
+      title: OpenShift Route
+      icon: web
+      type: website
+    - url: https://console-openshift-console.apps.cluster-4z99r.dyn.redhatworkshops.io/k8s/cluster/projects/spring-demos3
+      title: OpenShift Project
+      icon: catalog
+    - url: https://quay.io/repository/openshifttest/hello-openshift
+      title: Demo image (Quay)
+      icon: catalog
 spec:
   type: service
   lifecycle: experimental
