@@ -13,7 +13,7 @@ metadata:
   description: Spring Boot backend demo (build + deploy)
   annotations:
     github.com/project-slug: dl-rhdh-org/spring-app3
-    backstage.io/source-location: url:https://github.com/dl-rhdh-org/spring-app3
+    backstage.io/source-location: url:https://github.com/dl-rhdh-org/spring-app3/tree/main
     backstage.io/kubernetes-id: spring-app3
     backstage.io/kubernetes-namespace: spring-demos3
     # Image Registry (Quay) tab — must match a Quay repo the plugin can read
@@ -21,7 +21,7 @@ metadata:
     argocd/app-name: spring-app3
     argocd/app-namespace: openshift-gitops
     argocd/instance-name: main
-    backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: url:https://github.com/dl-rhdh-org/spring-app3/tree/main
     servicenow.com/entity-id: spring-app3
   tags:
     - spring-boot
