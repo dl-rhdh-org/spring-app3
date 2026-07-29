@@ -23,6 +23,7 @@ metadata:
     argocd/instance-name: main
     backstage.io/techdocs-ref: url:https://github.com/dl-rhdh-org/spring-app3/tree/main
     servicenow.com/entity-id: spring-app3
+    sonarqube.org/project-key: spring-app3
   tags:
     - spring-boot
     - java
