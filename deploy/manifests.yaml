@@ -50,6 +50,11 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          envFrom:
+            - configMapRef:
+                name: spring-app3-config
+            - secretRef:
+                name: spring-app3-secret
 ---
 apiVersion: v1
 kind: Service
