@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-app3-config
+  namespace: spring-demos3
+  labels:
+    app: spring-app3
+    backstage.io/kubernetes-id: spring-app3
+  annotations:
+    rhdh.demo/managed-by: fulfill-config-secret-gitops
+data:
+  # Mutable via RHDH "Fulfill Config or Secret Change" template
+  DEMO_MESSAGE: "hello-from-gitops"
+  LOG_LEVEL: "INFO"
