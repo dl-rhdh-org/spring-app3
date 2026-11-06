@@ -7,8 +7,8 @@ metadata:
     app: spring-app3
     backstage.io/kubernetes-id: spring-app3
   annotations:
-    rhdh.demo/managed-by: fulfill-config-secret-gitops
-    rhdh.demo/snow-incident: "INC0010004"
+    rhdh.demo/managed-by: fulfill-config-gitops
+    rhdh.demo/snow-incident: "INC0010005"
 data:
-  DEMO_MESSAGE: "hello-from-rhdh-fulfill"
-  LOG_LEVEL: "DEBUG"
+  DEMO_MESSAGE: "hello-from-rhdh-fulfill-2"
+  LOG_LEVEL: "INFO"
