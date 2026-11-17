@@ -1,0 +1,66 @@
+schemaVersion: 2.2.2
+metadata:
+  name: spring-boot
+  displayName: Spring Boot
+  description: Java Spring Boot workspace (Maven + UDI)
+  projectType: springboot
+  language: Java
+  tags:
+    - Java
+    - Spring
+components:
+  - name: tools
+    container:
+      # Same UDI Dev Spaces uses by default — already cached on this cluster after first pull
+      image: registry.redhat.io/devspaces/udi-rhel9:latest
+      memoryLimit: 3Gi
+      memoryRequest: 1Gi
+      cpuLimit: "2"
+      cpuRequest: 200m
+      mountSources: true
+      endpoints:
+        - exposure: public
+          name: http-8080
+          protocol: http
+          targetPort: 8080
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+      env:
+        - name: DEBUG_PORT
+          value: "5005"
+  - name: m2
+    volume:
+      size: 3Gi
+commands:
+  - id: build
+    exec:
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: ./mvnw -Dmaven.test.skip=true package
+      group:
+        kind: build
+        isDefault: true
+  - id: run
+    exec:
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: ./mvnw spring-boot:run
+      group:
+        kind: run
+        isDefault: true
+  - id: debug
+    exec:
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: >-
+        java -Xdebug
+        -Xrunjdwp:server=y,transport=dt_socket,address=${DEBUG_PORT},suspend=n
+        -jar target/*.jar
+      group:
+        kind: debug
+        isDefault: true
