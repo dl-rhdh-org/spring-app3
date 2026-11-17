@@ -1,24 +1,3 @@
-# Namespace is created by Argo (CreateNamespace=true) or exists already.
-# Do not include a Namespace object here: AppProjects from argocd:create-resources
-# deny cluster-scoped resources, which causes "Namespace is not permitted" / Missing.
----
-# Allow OpenShift GitOps to manage resources in this namespace (sync before workloads)
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: argocd-application-controller-admin
-  namespace: spring-demos3
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: admin
-subjects:
-  - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller
-    namespace: openshift-gitops
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -43,18 +22,16 @@ spec:
         backstage.io/kubernetes-id: spring-app3
     spec:
       containers:
-        - name: app
-          # Demo image — replace with Quay-built image once CI push is enabled
-          # Tag "latest" does not exist on this repo; use a real tag.
-          image: quay.io/openshifttest/hello-openshift:1.2.0
-          ports:
-            - containerPort: 8080
-              name: http
-          envFrom:
-            - configMapRef:
-                name: spring-app3-config
-            - secretRef:
-                name: spring-app3-secret
+      - name: app
+        image: quay.io/openshifttest/hello-openshift:1.2.0
+        ports:
+        - containerPort: 8080
+          name: http
+        envFrom:
+        - configMapRef:
+            name: spring-app3-config
+        - secretRef:
+            name: spring-app3-secret
 ---
 apiVersion: v1
 kind: Service
@@ -68,9 +45,9 @@ spec:
   selector:
     app: spring-app3
   ports:
-    - port: 8080
-      targetPort: 8080
-      name: http
+  - port: 8080
+    targetPort: 8080
+    name: http
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
